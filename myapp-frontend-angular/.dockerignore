@@ -1,0 +1,8 @@
+.git
+.vscode
+Dockerfile-dev
+docker-compose-dev.yaml
+README.md
+
+dist
+src/generated

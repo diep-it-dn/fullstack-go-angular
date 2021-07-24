@@ -1,0 +1,33 @@
+mutation setContentSetting($input: SetContentSettingIn!){
+  setContentSetting(input: $input) {
+    id
+    name
+    value
+    createTime
+    updateTime
+  }
+}
+
+mutation deleteContentSetting($id: ID!) {
+  deleteContentSetting(id: $id)
+}
+
+query contentSettingByName($name: String!) {
+  contentSetting(name: $name) {
+    id
+    name
+    value
+    createTime
+    updateTime
+  }
+}
+
+query contentSettings {
+  contentSettings {
+    id
+    name
+    value
+    createTime
+    updateTime
+  }
+}

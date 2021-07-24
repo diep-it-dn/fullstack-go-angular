@@ -1,0 +1,13 @@
+<app-progress-bar [loading]="loading"></app-progress-bar>
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div fxLayout="column" fxFlexFill fxLayoutAlign="center center">
+    <div>
+      <quill-editor #contentInput placeholder="Enter Content" id="content" formControlName="value"></quill-editor>
+    </div>
+
+    <div style="padding-top: 20px">
+      <button mat-stroked-button color="primary" [disabled]="!form.dirty || form.invalid || loading" type="submit"
+        class="signupbtn">Save</button>
+    </div>
+  </div>
+</form>

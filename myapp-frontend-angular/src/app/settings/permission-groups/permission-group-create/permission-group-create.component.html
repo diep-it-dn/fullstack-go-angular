@@ -1,0 +1,20 @@
+<app-base-form [baseForm]="baseForm" (submited)="onSubmit()">
+  <div form-fields [formGroup]="baseForm.form" fxLayout="column" fxLayoutAlign="center center">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="form.controls.name.errors?.required">
+        {{form.controls.name.errors!.required.message}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description">
+    </mat-form-field>
+    <div>
+      <mat-list-item *ngFor="let permission of permissionAll; let i = index">
+        <mat-checkbox [value]="permission" (change)="onChange($event)">
+          {{permission}}
+        </mat-checkbox>
+      </mat-list-item>
+    </div>
+  </div>
+</app-base-form>

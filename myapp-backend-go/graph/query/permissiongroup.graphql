@@ -1,0 +1,86 @@
+query permissionAll {
+  permissionAll
+}
+
+# {"input": {"name": "Group 1", "description": "Group 1 description", "permissions": ["USER_C"]}}
+mutation createPermissionGroup($input: CreatePermissionGroupIn!) {
+  createPermissionGroup(input: $input) {
+    id
+    name
+    description
+    permissions
+    createTime
+    updateTime
+  }
+}
+
+
+# {"id": 1}
+query permissionGroupById($id: ID!) {
+  permissionGroup(id: $id) {
+    id
+    name
+    description
+    permissions
+    createTime
+    updateTime
+  }
+}
+
+query permissionGroups($input: PermissionGroupsIn!) {
+  permissionGroups(input: $input) {
+    totalCount
+    edges {
+      node {
+        id
+        name
+        description
+        permissions
+        createTime
+        updateTime
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+
+query permissionGroupAll {
+  permissionGroupAll {
+    id
+    name
+    description
+    permissions
+    createTime
+    updateTime
+  }
+}
+
+# {
+#   "id": 3,
+#   "input":{
+#     "nameIn": {"isUpdate": true, "value":  "Group 1 update"},
+#   	"descriptionIn": {"isUpdate": true, "value":  "Group 1 description update"},
+#    	"permissionsIn": {"isUpdate": true, "value":  ["USER_R"]}
+#   }
+# }
+mutation updatePermissionGroup($id: ID!, $input: UpdatePermissionGroupIn!) {
+  updatePermissionGroup(id: $id, input: $input) {
+    id
+    name
+    description
+    permissions
+    createTime
+    updateTime
+  }
+}
+
+# {"id": 3}
+mutation deletePermissionGroup($id:ID!) {
+  deletePermissionGroup(id: $id)
+}

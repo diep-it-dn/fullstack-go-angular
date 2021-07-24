@@ -1,0 +1,35 @@
+.news-feed {
+  width: 100%;
+
+  .post {
+    a {
+      text-decoration: none;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+      color: inherit;
+    }
+
+    text-decoration: none;
+    width: 100%;
+
+    mat-card {
+      margin-top: 20px;
+
+      .mat-card-actions {
+        margin: 0;
+        padding: 16px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  mat-card {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

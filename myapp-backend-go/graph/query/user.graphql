@@ -1,0 +1,285 @@
+mutation createUser($input: CreateUserIn!) {
+  createUser(input: $input) {
+    id
+    email
+    emailVerified
+    phoneNumber
+    permissionGroups {
+      id
+      name
+      description
+      permissions
+    }
+    status
+    displayedName
+    firstName
+    lastName
+    gender
+    birthday
+    address
+    description
+    avatarURL
+    createTime
+    updateTime
+  }
+}
+
+mutation registerUser($input: RegisterUserIn!) {
+  registerUser(input: $input) {
+    tokenPair {
+      token
+      refreshToken
+    }
+    user {
+      id
+      email
+      emailVerified
+      status
+      displayedName
+      firstName
+      lastName
+      birthday
+      avatarURL
+      gender
+      createTime
+      updateTime
+    }
+  }
+}
+
+
+# {"input": {"email": "diep.it.dn@gmail.com", "password": "123123"}}
+mutation login($input: LoginIn!) {
+  login(input: $input) {
+    tokenPair {
+      token
+      refreshToken
+    }
+    user {
+      id
+      email
+      emailVerified
+      phoneNumber
+      permissionGroups {
+        id
+        name
+        description
+        permissions
+      }
+      status
+      displayedName
+      firstName
+      lastName
+      gender
+      birthday
+      address
+      description
+      avatarURL
+      createTime
+      updateTime
+    }
+  }
+}
+
+mutation loginByGoogle($input: LoginByGoogleIn!) {
+  loginByGoogle(input: $input) {
+    tokenPair {
+      token
+      refreshToken
+    }
+    user {
+      id
+      email
+      emailVerified
+      phoneNumber
+      permissionGroups {
+        id
+        name
+        description
+        permissions
+      }
+      status
+      displayedName
+      firstName
+      lastName
+      gender
+      birthday
+      address
+      description
+      avatarURL
+      createTime
+      updateTime
+    }
+  }
+}
+
+
+# {"id": "8589934593", "input": {"firstNameIn": {"isUpdate": true, "value": "nd"}}}
+mutation updateUser($id: ID!, $input: UpdateUserIn!) {
+  updateUser(id: $id, input: $input) {
+    id
+    email
+    emailVerified
+    phoneNumber
+    permissionGroups {
+      id
+      name
+      description
+      permissions
+    }
+    status
+    displayedName
+    firstName
+    lastName
+    gender
+    birthday
+    address
+    description
+    avatarURL
+    createTime
+    updateTime
+  }
+}
+
+mutation updateCurrentUser($input: UpdateCurrentUserIn!) {
+  updateCurrentUser(input: $input) {
+    id
+    email
+    emailVerified
+    phoneNumber
+    permissionGroups {
+      id
+      name
+      description
+      permissions
+    }
+    status
+    displayedName
+    firstName
+    lastName
+    gender
+    birthday
+    address
+    description
+    avatarURL
+    createTime
+    updateTime
+  }
+}
+
+query currentUser {
+  currentUser {
+    id
+    email
+    emailVerified
+    phoneNumber
+    permissionGroups {
+      id
+      name
+      description
+      permissions
+    }
+    status
+    displayedName
+    firstName
+    lastName
+    gender
+    birthday
+    address
+    description
+    avatarURL
+    createTime
+    updateTime
+  }
+}
+
+# {"id": "4294967297"}
+query userById($id: ID!) {
+  user(id: $id) {
+    id
+    email
+    emailVerified
+    phoneNumber
+    permissionGroups {
+      id
+      name
+      description
+      permissions
+    }
+    status
+    displayedName
+    firstName
+    lastName
+    gender
+    birthday
+    address
+    description
+    avatarURL
+    createTime
+    updateTime
+  }
+}
+
+query users($input: UsersIn) {
+  users(input: $input) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      node {
+        id
+        email
+        emailVerified
+        phoneNumber
+        permissionGroups {
+          id
+          name
+          description
+          permissions
+        }
+        status
+        displayedName
+        firstName
+        lastName
+        gender
+        birthday
+        address
+        description
+        avatarURL
+        createTime
+        updateTime
+      }
+    }
+  }
+}
+
+# {"input": {"currentPassword": "123123", "newPassword": "456456"}}
+mutation changePassword($input: ChangePasswordIn!) {
+  changePassword(input: $input)
+}
+
+# {"email": "diep.it.dn@gmail.com"}
+mutation forgotPassword($email: String!) {
+  forgotPassword(email: $email)
+}
+
+# {"input": {"token": "<token>", "newPassword": "567567"}
+mutation resetPassword($input: ResetPasswordIn!) {
+  resetPassword(input: $input)
+}
+
+# {"refreshTokenIn": "<refreshToken>"}
+mutation refreshToken($refreshTokenIn: String!) {
+  refreshToken(refreshTokenIn: $refreshTokenIn) {
+    token
+    refreshToken
+  }
+}
+
+mutation deleteUser($id: ID!) {
+  deleteUser(id: $id)
+}

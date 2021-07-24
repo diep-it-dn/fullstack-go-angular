@@ -1,0 +1,22 @@
+type ContentSetting implements Node {
+  id: ID!
+  name: String!
+  value: String!
+  createTime: Time!
+  updateTime: Time!
+}
+
+input SetContentSettingIn {
+  name: String!
+  value: String!
+}
+
+extend type Query {
+  contentSetting(name: String!): ContentSetting
+  contentSettings: [ContentSetting!]
+}
+
+extend type Mutation {
+  setContentSetting(input: SetContentSettingIn!): ContentSetting! @hasAnyPermission(permissions: [CONTENT_SETTING, CONTENT_SETTING_S])
+  deleteContentSetting(id: ID!): Boolean! @hasAnyPermission(permissions: [CONTENT_SETTING, CONTENT_SETTING_D])
+}

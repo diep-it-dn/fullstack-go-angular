@@ -1,0 +1,29 @@
+type Tag implements Node {
+  id: ID!
+  name: String!
+}
+
+input TagsIn {
+  pageIn: PageIn
+  q: String
+}
+
+type TagConnection {
+  totalCount: Int!
+  edges: [TagEdge]
+  pageInfo: PageInfo!
+}
+
+type TagEdge {
+  node: Tag
+  cursor: Cursor!
+}
+
+extend type Query {
+  tags(input: TagsIn): TagConnection
+}
+
+extend type Mutation {
+  updateTag(id: ID!, newName: String!): Tag! @hasAnyPermission(permissions: [TAG, TAG_U])
+  deleteTag(id: ID!): Boolean! @hasAnyPermission(permissions: [TAG, TAG_D])
+}

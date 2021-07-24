@@ -1,0 +1,102 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+  background: #e2e2e2;
+}
+
+#myapp-main-wrapper {
+  height: 100%;
+
+  .mat-elevation-z8 {
+    overflow-x: auto;
+  }
+
+  .material-icons {
+    overflow: hidden;
+  }
+
+  .myapp-toolbar {
+    position: fixed;
+    z-index: 2;
+    // background-color: #2b2c30;
+  }
+
+  .myapp-content {
+    padding-top: 65px;
+    height: calc(100% - 65px);
+  }
+
+  .mat-card-avatar {
+    border-radius: 50%;
+  }
+
+  .myapp-filter {
+    padding: 20px;
+  }
+
+  .myapp-active-tab,
+  .myapp-active-sub-tab {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.059);
+  }
+
+  mat-sidenav-content {
+    .myapp-active-tab {
+      border-top: 3px solid black;
+    }
+  }
+
+  .myapp-about-content {
+    display: flex;
+    justify-content: center;
+
+    .ngx-quill-view-html {
+      max-width: 1024px;
+    }
+  }
+
+  .myapp-full-width {
+    width: 100% !important;
+  }
+
+  .news-feed .ql-editor * {
+    cursor: pointer !important;
+  }
+
+  .myapp-tags {
+    a {
+        display: inline-block;
+        padding: .3em .3em;
+        margin: 5px;
+        color: #39739d;
+        background-color: #E1ECF4;
+        border-color: #E1ECF4;
+        text-decoration: none;
+        text-align: center;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 3px;
+        transition: all .15s ease-in-out;
+        cursor: pointer;
+    }
+  }
+
+  mat-table mat-cell {
+    overflow-x: auto;
+  }
+}
+
+snack-bar-container.error {
+  color: red !important;
+}

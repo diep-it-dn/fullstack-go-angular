@@ -1,0 +1,30 @@
+{
+  "name": "fullstack-go-angular",
+  "version": "1.0.0",
+  "description": "Full-stack go, angular",
+  "scripts": {
+    "start": "docker compose up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diep-it-dn/fullstack-go-angular.git"
+  },
+  "keywords": [
+    "fullstack",
+    "full-stack",
+    "Go",
+    "Golang",
+    "Angular",
+    "GraphQL",
+    "ent",
+    "gqlgen",
+    "gqlgenc",
+    "docker"
+  ],
+  "author": "Diep Nguyen Ngoc <diep.it.dn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/diep-it-dn/fullstack-go-angular/issues"
+  },
+  "homepage": "https://github.com/diep-it-dn/fullstack-go-angular#readme"
+}

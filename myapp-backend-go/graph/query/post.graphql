@@ -1,0 +1,176 @@
+mutation createPost($input: CreatePostIn!) {
+  createPost(input: $input) {
+    id
+    title
+    shortDescription
+    content
+    status
+    tags {
+      id
+      name
+    }
+    createdBy {
+      id
+      email
+      firstName
+      lastName      
+      avatarURL
+    }
+    updatedBy {
+      id
+      email
+      firstName
+      lastName      
+      avatarURL
+    }
+    createTime
+    updateTime
+  }
+}
+
+
+query posts($input: PostsIn!) {
+  posts(input: $input) {
+    totalCount
+    edges {
+      node {
+        id
+        title
+        shortDescription
+        status
+        tags {
+          id
+          name
+        }
+        createdBy {
+          id
+          email
+          firstName
+          lastName
+          avatarURL
+        }
+        updatedBy {
+          id
+          email
+          firstName
+          lastName
+          avatarURL
+        }
+        createTime
+        updateTime
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+query publishedPosts($input: PublishedPostsIn!) {
+  publishedPosts(input: $input) {
+    totalCount
+    edges {
+      node {
+        id
+        title
+        shortDescription
+        status
+        tags {
+          id
+          name
+        }
+        createdBy {
+          id
+          email
+          firstName
+          lastName
+          avatarURL
+        }
+        updatedBy {
+          id
+          email
+          firstName
+          lastName
+          avatarURL
+        }
+        createTime
+        updateTime
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+query postById($id: ID!) {
+  postById(id: $id) {
+    id
+    title
+    shortDescription
+    content
+    status
+    tags {
+      id
+      name
+    }
+    createdBy {
+      id
+      email
+      firstName
+      lastName
+      avatarURL
+    }
+    updatedBy {
+      id
+      email
+      firstName
+      lastName
+      avatarURL
+    }
+    createTime
+    updateTime
+  }
+}
+
+
+mutation updatePost($id: ID!, $input: UpdatePostIn!) {
+  updatePost(id: $id, input: $input) {
+    id
+    title
+    shortDescription
+    content
+    status
+    tags {
+      id
+      name
+    }
+    createdBy {
+      id
+      email
+      firstName
+      lastName
+      avatarURL
+    }
+    updatedBy {
+      id
+      email
+      firstName
+      lastName
+      avatarURL
+    }
+    createTime
+    updateTime
+  }
+}
+
+
+mutation deletePost($id: ID!) {
+  deletePost(id: $id)
+}

@@ -1,0 +1,27 @@
+<mat-drawer-container class="app-container" style="height: 100%;">
+    <mat-drawer mode="side" opened fxHide fxShow.gt-sm>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/auth/profile"  [routerLinkActive]="['myapp-active-sub-tab']">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </a>
+            <a mat-list-item routerLink="/auth/change-password"  [routerLinkActive]="['myapp-active-sub-tab']">
+                <mat-icon>security</mat-icon>
+                <span>Change Password</span>
+            </a>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <mat-toolbar fxLayout="row" fxShow fxHide.gt-sm>
+            <a mat-button routerLink="/auth/profile"  [routerLinkActive]="['myapp-active-sub-tab']">
+                <mat-icon>person</mat-icon>
+                <span>Profile</span>
+            </a>
+            <a mat-button routerLink="/auth/change-password"  [routerLinkActive]="['myapp-active-sub-tab']">
+                <mat-icon>security</mat-icon>
+                <span>Change Password</span>
+            </a>
+        </mat-toolbar>
+        <router-outlet name="auth"></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

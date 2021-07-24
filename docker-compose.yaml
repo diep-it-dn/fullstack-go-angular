@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  myapp:
+    build:
+      context: .
+    container_name: myapp
+    environment:
+      - ENVIRONMENT=dockerlocal
+      - PORT=9999
+      - PRODUCTION.DATABASE.DRIVERNAME=pgx
+      - PRODUCTION.DATABASE.DATABASEURL=postgres://fullstack-go-angular:fullstack-go-angular@db:5432/fullstack-go-angular
+    ports:
+      - 9999:9999
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: postgres
+    # ports:
+      # - 5433:5432
+    environment:
+      - POSTGRES_USER=fullstack-go-angular
+      - POSTGRES_PASSWORD=fullstack-go-angular
+      - POSTGRES_DB=fullstack-go-angular
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+volumes:
+  database_postgres:

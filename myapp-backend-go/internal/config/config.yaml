@@ -1,0 +1,87 @@
+default: &default
+  name: "Full-Stack Dev myapp"
+  debug: false
+  baseURL: http://localhost:8050
+  database:
+    driverName: sqlite3
+    databaseURL: "file:myapp.db?cache=shared&_fk=1"
+    # driverName: pgx
+    # databaseURL: postgres://fullstack-go-angular:fullstack-go-angular@localhost:5432/fullstack-go-angular
+  tokenPair:
+    token:
+      secretKey: "abxcvxsd!@#secret@123"
+      expiredInMinutes: 1440
+    refreshToken:
+      secretKey: "asdfsadfsec#$%ret@123456"
+      expiredInMinutes: 2880
+  initPermissionGroup:
+    name: "Init Group"
+    description: "Created by the system as the Init Group with full permissions"
+  initUser:
+    email: diep.it.dn@gmail.com
+    password: 123123
+  mailServer:
+    sMTPServer: smtp.gmail.com
+    port: 587
+    sender:
+      email: "hotro.it.diep@gmail.com"
+      password: 
+  email:
+    forgotPassword:
+      token:
+        secretKey: "abxw2rsadf@#secret@123"
+        expiredInMinutes: 15
+    resetPassword:
+      subject: "Reset Password"
+      body: >
+        <!DOCTYPE HTML PULBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+        <html>
+        <head>
+        <meta http-equiv="content-type" content="text/html"; charset=ISO-8859-1">
+        </head>
+        <body>
+        Hi there,
+        <br><br>
+        Please follow this link to reset your password: {{.BaseURL}}/auth/reset-password/{{.Token}}<br>
+        <div class="moz-signature"><i><br>
+        <br>
+        Regards<br>	
+        <i></div>
+        </body>
+        </html>
+
+development:
+  <<: *default
+  baseURL: http://localhost:4201
+  debug: true
+  database:
+    driverName: pgx
+    databaseURL: postgres://fullstack-go-angular:fullstack-go-angular@localhost:5432/fullstack-go-angular
+
+test:
+  <<: *default
+  debug: true
+  database:
+    driverName: sqlite3
+    databaseURL: "file:myapp_test.db?cache=shared&_fk=1"
+
+dockerlocal:
+  <<: *default
+  baseURL: http://localhost:9999
+  debug: true
+  database:
+    driverName: pgx
+    databaseURL: postgres://fullstack-go-angular:fullstack-go-angular@db:5432/fullstack-go-angular
+
+production:
+  <<: *default
+  baseURL: https://fullstack-go-angular.herokuapp.com
+  database:
+    driverName: 
+    databaseURL:
+  mailServer:
+    sMTPServer: smtp.gmail.com
+    port: 587
+    sender:
+      email: "hotro.it.diep@gmail.com"
+      password:

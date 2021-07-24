@@ -1,0 +1,13 @@
+<app-base-form [baseForm]="baseForm" (submited)="onSubmit()">
+  <div form-fields [formGroup]="baseForm.form" fxLayout="column">
+    <mat-form-field>
+      <input matInput placeholder="New email" formControlName="email">
+      <mat-error *ngIf="form.controls.email.errors?.required">
+        {{form.controls.email?.errors!.required.message}}
+      </mat-error>
+      <mat-error *ngIf="baseForm.form.controls.email?.errors?.email">
+        {{baseForm.form.controls.email.errors!.email.message}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+</app-base-form>

@@ -1,0 +1,7 @@
+<mat-tab-group>
+  <mat-tab *ngFor="let aboutTab of aboutTabs" label="{{aboutTab.label}}">
+    <div class="myapp-about-content">
+      <quill-view-html [content]="aboutTab.content ?? ''" theme="snow"></quill-view-html>
+    </div>
+  </mat-tab>
+</mat-tab-group>

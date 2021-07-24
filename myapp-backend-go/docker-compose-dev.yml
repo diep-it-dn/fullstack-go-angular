@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  myapp-backend-go:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    container_name: myapp-backend-go
+    networks:
+      - proxy-net
+    environment:
+      - ENVIRONMENT=dockerlocal
+      - PORT=9999
+      - PRODUCTION.DATABASE.DRIVERNAME=pgx
+      - PRODUCTION.DATABASE.DATABASEURL=postgres://fullstack-go-angular:fullstack-go-angular@db:5432/fullstack-go-angular
+    ports:
+      - 9999:9999
+      - 2345:2345
+    depends_on:
+      - db
+    restart: always
+    volumes:
+      - ./:/app
+      - ./internal/config/config.yaml:/app/tmp/internal/config/config.yaml
+  db:
+    image: postgres
+    container_name: myapp-backend-go-db
+    networks: 
+        - proxy-net
+    # ports:
+      # - 5433:5432
+    environment:
+      - POSTGRES_USER=fullstack-go-angular
+      - POSTGRES_PASSWORD=fullstack-go-angular
+      - POSTGRES_DB=fullstack-go-angular
+    volumes:
+      - database_postgres:/var/lib/postgresql/data
+volumes:
+  database_postgres:
+
+networks:
+  proxy-net:
+    name: proxy-net

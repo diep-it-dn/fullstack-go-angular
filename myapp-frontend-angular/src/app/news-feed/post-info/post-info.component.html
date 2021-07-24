@@ -1,0 +1,10 @@
+<div fxLayout="row" fxLayoutAlign="end center" class="author-info">
+  <mat-icon>person</mat-icon><span [matTooltip]="post.createdBy.email">{{getAuthorName(post.createdBy)}} -
+    {{post.createTime | timeago}}
+  </span>
+</div>
+<div class="myapp-tags" fxLayout="row wrap">
+  <a *ngFor="let tag of post.tags" [routerLink]="[]" [queryParams]="{tag: tag.name}" class="myapp-tags">
+    {{tag.name}}
+  </a>
+</div>

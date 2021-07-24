@@ -1,0 +1,16 @@
+<div class="post" fxLayout="column" fxLayoutAlign="center center">
+  <app-progress-bar [loading]="loading" class="myapp-full-width"></app-progress-bar>
+  <div class="content">
+    <mat-card *ngIf="!loading && post">
+      <mat-card-header>
+        <mat-card-title class="title">{{post.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <quill-view-html [content]="post.content" theme="snow"></quill-view-html>
+      </mat-card-content>
+      <mat-card-actions class="action-buttons">
+        <app-post-info [post]="post"></app-post-info>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

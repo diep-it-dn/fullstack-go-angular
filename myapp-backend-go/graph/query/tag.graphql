@@ -1,0 +1,29 @@
+query tags($input: TagsIn!) {
+  tags(input: $input) {
+    totalCount
+    edges {
+      node {
+        id
+        name
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+  }
+}
+
+mutation updateTag($id: ID!, $newName: String!) {
+  updateTag(id: $id, newName: $newName) {
+    id
+    name
+  }
+}
+
+
+mutation deleteTag($id: ID!) {
+  deleteTag(id: $id)
+}

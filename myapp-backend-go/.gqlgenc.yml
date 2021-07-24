@@ -1,0 +1,13 @@
+model:
+  filename: ./test/model/models_gen.go
+client:
+  filename: ./test/generated/client.go
+models:
+  Time:
+    model: github.com/99designs/gqlgen/graphql.String
+schema:
+  - graph/schema/*.graphql
+  # headers:
+  #   Authorization: "Bearer ${TOKEN}" # public access token
+query:
+  - "./graph/query/*.graphql"

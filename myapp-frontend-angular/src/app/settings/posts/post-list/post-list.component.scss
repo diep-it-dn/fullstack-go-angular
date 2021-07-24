@@ -1,0 +1,33 @@
+.post {
+  a {
+    text-decoration: none;
+  }
+  a, a:visited, a:hover, a:active {
+    color: inherit;
+  }
+
+  mat-card {
+    margin: 20px;
+  }
+
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px;
+  a {
+      padding: .2em .3em;
+      margin: 2px 2px 2px 0;
+      color: #39739d;
+      background-color: #E1ECF4;
+      border-color: #E1ECF4;
+      text-decoration: none;
+      text-align: center;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 3px;
+      transition: all .15s ease-in-out;
+      cursor: pointer;
+  }
+}

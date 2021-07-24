@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+services:
+  myapp-frontent-angular:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    container_name: myapp-frontent-angular
+    command: sh -c "npm run codegen & npm run start-inside-docker"
+    networks:
+      - proxy-net
+    ports:
+      - 4201:4201
+      - 49153:49153
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+      - ../myapp-backend-go/graph/schema:/home/node//myapp-backend-go/graph/schema
+      - ../myapp-backend-go/graph/query:/home/node//myapp-backend-go/graph/query
+      - node_modules:/home/node/app/node_modules
+volumes:
+  node_modules:
+
+networks:
+  proxy-net:
+    external: true
+    name: proxy-net

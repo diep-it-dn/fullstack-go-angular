@@ -1,0 +1,186 @@
+enum UserGender {
+  Male
+  Female
+}
+
+enum UserStatus {
+  ENABLED
+  DISABLED
+}
+
+
+type User implements Node {
+  id: ID!
+  email: String!
+  emailVerified: Boolean!
+  phoneNumber: String
+  permissionGroups: [PermissionGroup!]
+  status: UserStatus!
+  displayedName: String
+  firstName: String
+  lastName: String
+  gender: UserGender
+  birthday: Time
+  address: String
+  description: String
+  avatarURL: String
+  createTime: Time!
+  updateTime: Time!
+}
+
+type UserConnection {
+  totalCount: Int!
+  edges: [UserEdge]
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  node: User
+  cursor: Cursor!
+}
+
+enum UserOrderField {
+  EMAIL
+  STATUS
+  DISPLAYED_NAME
+  FIRST_NAME
+  LAST_NAME
+  BIRTHDAY
+  GENDER
+  CREATE_TIME
+  UPDATE_TIME
+}
+
+input UserOrder {
+  direction: OrderDirection!
+  field: UserOrderField
+}
+
+input UsersIn {
+  pageIn: PageIn
+  orderBy: UserOrder
+  email: String
+}
+
+input CreateUserIn {
+  email: String! @isValidEmail(field: "email") @isNotExistsEmail(field: "email")
+  password: String! @isValidPassword(field: "password")
+  phoneNumber: String
+  permissionGroupIDs: [ID!]
+  displayedName: String
+  firstName: String
+  lastName: String
+  gender: UserGender
+  birthday: Time
+  description: String
+  address: String
+  avatarURL: String
+}
+
+input UpdateUserIn {
+  emailIn: UpdateRequiredStringIn @isValidEmail(field: "emailIn")
+  passwordIn: UpdateRequiredStringIn @isValidPassword(field: "passwordIn")
+  phoneNumberIn: UpdateStringIn
+  permissionGroupIDsIn: UpdateIDsIn
+  statusIn: UserStatusIn
+  displayedNameIn: UpdateStringIn
+  firstNameIn: UpdateStringIn
+  lastNameIn: UpdateStringIn
+  genderIn: UpdateUserGenderIn
+  birthdayIn: UpdateTimeIn
+  addressIn: UpdateStringIn
+  descriptionIn: UpdateStringIn
+  avatarURLIn: UpdateStringIn
+}
+
+input UserStatusIn {
+  isUpdate: Boolean!
+  value: UserStatus!
+}
+input UpdateUserGenderIn {
+  isUpdate: Boolean!
+  value: UserGender
+}
+
+input UpdateCurrentUserIn {
+  displayedNameIn: UpdateStringIn
+  firstNameIn: UpdateStringIn
+  lastNameIn: UpdateStringIn
+  genderIn: UpdateUserGenderIn
+  birthdayIn: UpdateTimeIn
+  phoneNumberIn: UpdateStringIn
+  addressIn: UpdateStringIn
+  descriptionIn: UpdateStringIn
+  avatarURLIn: UpdateStringIn
+}
+
+
+input RegisterUserIn {
+  email: String! @isValidEmail(field: "email") @isNotExistsEmail(field: "email")
+  password: String! @isValidPassword(field: "password")
+  phoneNumber: String
+  displayedName: String
+  firstName: String
+  lastName: String
+  gender: UserGender
+  birthday: Time
+  address: String
+  description: String
+  avatarURL: String
+}
+
+input LoginIn {
+  email: String! @isValidEmail(field: "email")
+  password: String!
+}
+
+type TokenPair {
+  token: String!
+  refreshToken: String!
+}
+
+type RegisterUserOut {
+  tokenPair: TokenPair!
+  user: User!
+}
+
+type LoginOut {
+  tokenPair: TokenPair!
+  user: User!
+}
+
+input ChangePasswordIn {
+  currentPassword: String!
+  newPassword: String! @isValidPassword(field: "newPassword")
+}
+
+input ResetPasswordIn {
+   token: String!
+   newPassword: String! @isValidPassword(field: "newPassword")
+}
+
+input LoginByGoogleIn {
+  authToken: String
+  idToken: String
+}
+
+extend type Query {
+  currentUser: User! @isLoggedIn
+  user(id: ID!): User! @hasAnyPermission(permissions: [USER, USER_R])
+  users(input: UsersIn): UserConnection @hasAnyPermission(permissions: [USER, USER_R])
+}
+
+extend type Mutation {
+  createUser(input: CreateUserIn!): User! @hasAnyPermission(permissions: [USER, USER_C])
+  updateUser(id: ID!, input: UpdateUserIn!): User! @hasAnyPermission(permissions: [USER, USER_U])
+  deleteUser(id: ID!): Boolean! @hasAnyPermission(permissions: [USER, USER_D])
+
+  updateCurrentUser(input: UpdateCurrentUserIn!): User! @isLoggedIn
+  registerUser(input: RegisterUserIn!): RegisterUserOut!
+  login(input: LoginIn!): LoginOut!
+  changePassword(input: ChangePasswordIn!): Boolean! @isLoggedIn
+  forgotPassword(email: String!): Boolean!
+  resetPassword(input: ResetPasswordIn!): Boolean!
+  refreshToken(refreshTokenIn: String!): TokenPair!
+  loginByGoogle(input: LoginByGoogleIn!): LoginOut!
+}

@@ -1,0 +1,44 @@
+  <app-base-form [baseForm]="baseForm" (submited)="onSubmit()">
+    <div form-fields [formGroup]="baseForm.form" fxLayout="column">
+      <mat-form-field>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option value="ENABLED">Enabled</mat-option>
+          <mat-option value="DISABLED">Disabled</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="First name" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last name" formControlName="lastName">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="date" matInput placeholder="Birthday" formControlName="birthday">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option></mat-option>
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Permission Groups</mat-label>
+        <mat-select formControlName="permissionGroupIDs" multiple>
+          <mat-option *ngFor="let permissionGroup of permissionGroupAll" [value]="permissionGroup.id">
+            {{permissionGroup.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+
+    <ng-container bottom>
+      <app-other-options [id]="id" (updatedEmailOutput)="onUpdatedEmail($event)"></app-other-options>
+    </ng-container>
+  </app-base-form>

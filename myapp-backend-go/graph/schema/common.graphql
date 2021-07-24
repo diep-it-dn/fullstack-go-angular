@@ -1,0 +1,89 @@
+interface Node {
+  id: ID!
+}
+
+scalar Time
+scalar Cursor
+
+directive @isLoggedIn on FIELD_DEFINITION
+directive @hasAnyPermission(permissions: [Permission!]!) on FIELD_DEFINITION
+
+directive @isValidEmail (field: String!) on
+	INPUT_FIELD_DEFINITION |
+	FIELD_DEFINITION
+
+directive @isNotExistsEmail (field: String!) on
+	INPUT_FIELD_DEFINITION |
+	FIELD_DEFINITION
+
+directive @isValidPassword (field: String!) on
+	INPUT_FIELD_DEFINITION |
+	FIELD_DEFINITION
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: Cursor
+  endCursor: Cursor
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+input PageIn {
+  after: Cursor
+  first: Int
+  before: Cursor
+  last: Int
+}
+
+type Query {
+  node(id: ID!): Node
+}
+
+input UpdateStringIn {
+  isUpdate: Boolean!
+  value: String
+}
+
+input UpdateRequiredStringIn {
+  isUpdate: Boolean!
+  value: String!
+}
+
+input UpdateTimeIn {
+  isUpdate: Boolean!
+  value: Time
+}
+
+input UpdateRequiredTimeIn {
+  isUpdate: Boolean!
+  value: Time
+}
+
+input UpdateIntIn {
+  isUpdate: Boolean!
+  value: Int
+}
+
+input UpdateRequiredIntIn {
+  isUpdate: Boolean!
+  value: Int
+}
+
+input UpdateBooleanIn {
+  isUpdate: Boolean!
+  value: Boolean
+}
+input UpdateRequiredBooleanIn {
+  isUpdate: Boolean!
+  value: Boolean
+}
+
+input UpdateIDsIn {
+  isUpdate: Boolean!
+  value: [ID!]
+}
+

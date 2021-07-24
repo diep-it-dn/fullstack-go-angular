@@ -1,0 +1,21 @@
+.post {
+  width: 100%;
+
+  .content {
+    width: 100%;
+    max-width: 1024px;
+
+    mat-card {
+      .mat-card-actions {
+        margin: 0;
+        padding: 16px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+  }
+
+}

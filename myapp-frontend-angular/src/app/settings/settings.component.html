@@ -1,0 +1,37 @@
+<mat-toolbar fxLayout="row" fxShow fxHide.gt-sm>
+  <mat-nav-list fxLayout style="overflow: auto;">
+    <a mat-list-item [routerLink]="['/settings/permission-groups']" [routerLinkActive]="['myapp-active-sub-tab']">
+      <span>Permission Groups</span>
+    </a>
+    <a mat-list-item [routerLink]="['/settings/users']" [routerLinkActive]="['myapp-active-sub-tab']">
+      <span>Users</span>
+    </a>
+    <a mat-list-item [routerLink]="['/settings/contents']" [routerLinkActive]="['myapp-active-sub-tab']">
+      <span>Contents</span>
+    </a>
+    <a mat-list-item [routerLink]="['/settings/posts']" [routerLinkActive]="['myapp-active-sub-tab']">
+      <span>Posts</span>
+    </a>
+  </mat-nav-list>
+</mat-toolbar>
+<mat-drawer-container class="example-container" style="height: 100%;">
+  <mat-drawer mode="side" opened fxHide fxShow.gt-sm>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/settings/permission-groups']" [routerLinkActive]="['myapp-active-sub-tab']">
+        <span>Permission Groups</span>
+      </a>
+      <a mat-list-item [routerLink]="['/settings/users']" [routerLinkActive]="['myapp-active-sub-tab']">
+        <span>Users</span>
+      </a>
+      <a mat-list-item [routerLink]="['/settings/contents']" [routerLinkActive]="['myapp-active-sub-tab']">
+        <span>Contents</span>
+      </a>
+      <a mat-list-item [routerLink]="['/settings/posts']" [routerLinkActive]="['myapp-active-sub-tab']">
+        <span>Posts</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

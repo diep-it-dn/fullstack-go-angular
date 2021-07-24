@@ -1,0 +1,7 @@
+<mat-toolbar fxLayout="row">
+    <a mat-button [routerLink]="['new']">
+        <mat-icon>add</mat-icon>
+        <span>New</span>
+    </a>
+</mat-toolbar>
+<app-user-list [dataSource]="dataSource"></app-user-list>

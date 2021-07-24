@@ -1,0 +1,7 @@
+<mat-tab-group>
+    <mat-tab *ngFor="let item of uiContents" label="{{item.label}}">
+        <ng-template matTabContent>
+            <app-content-setting-details [name]="item.name"></app-content-setting-details>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>

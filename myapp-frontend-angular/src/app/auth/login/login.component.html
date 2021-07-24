@@ -1,0 +1,26 @@
+<app-base-form [baseForm]="baseForm" (submited)="onSubmit()">
+  <div form-fields [formGroup]="baseForm.form" fxLayout="column" fxLayoutAlign="center center">
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="form.controls.email.errors?.required">
+        {{form.controls.email.errors!.required.message}}
+      </mat-error>
+      <mat-error *ngIf="form.controls.email?.errors?.email">
+        {{form.controls.email.errors!.email.message}}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" matInput placeholder="Password" formControlName="password">
+      <mat-error *ngIf="form.controls.password.errors?.required">
+        {{form.controls.password.errors!.required.message}}
+      </mat-error>
+      <mat-error *ngIf="form.controls.password?.errors?.password">
+        {{form.controls.password.errors!.password.message}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <ng-container bottom>
+    <app-other-options></app-other-options>
+  </ng-container>
+</app-base-form>

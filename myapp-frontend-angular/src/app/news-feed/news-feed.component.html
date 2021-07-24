@@ -1,0 +1,37 @@
+<div class="news-feed">
+  <div class="myapp-filter">
+    <mat-form-field>
+      <mat-label>Search</mat-label>
+      <input matInput #q searchBy="q">
+      <button *ngIf="q" matSuffix mat-icon-button (click)="q.value=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <app-base-list [dataSource]="dataSource">
+    <ng-container data>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="post" *ngFor="let post of (dataSource.dataSubject | async)">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title class="title">
+                <a [routerLink]="['posts', post.node.id]">
+                  {{post.node.title}}
+                </a>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <a [routerLink]="['posts', post.node.id]">
+                <quill-view-html [content]="post.node.shortDescription" theme="snow"></quill-view-html>
+              </a>
+            </mat-card-content>
+            <mat-card-actions class="action-buttons">
+              <app-post-info [post]="post.node"></app-post-info>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="getPaginatorData($event)"></mat-paginator>
+      </div>
+    </ng-container>
+  </app-base-list>
+</div>

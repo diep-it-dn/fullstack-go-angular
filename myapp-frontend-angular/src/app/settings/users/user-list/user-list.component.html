@@ -1,0 +1,64 @@
+<div class="myapp-filter">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput #email searchBy="email" placeholder="Filter by email">
+    <button *ngIf="email" matSuffix mat-icon-button (click)="email.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<app-base-list [dataSource]="dataSource">
+  <ng-container data>
+    <div class="mat-elevation-z8">
+      <mat-table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Email"> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.email}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="displayedName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="DisplayedName"> Displayed name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.displayedName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="FirstName"> First name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.firstName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="LastName"> Last name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.lastName}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="birthday">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Birthday"> Birthday </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.birthday | date }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Gender"> Gender </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.gender }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Status"> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.status }} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button type="button" mat-icon-button (click)="onEdit(element.node.id)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button type="button" mat-icon-button (click)="onDelete(element.node.id)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onEdit(row.node.id)"
+          style="cursor: pointer;"></mat-row>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="6">No data matching the filter "{{email.value}}"</td>
+        </tr>
+      </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="getPaginatorData($event)"></mat-paginator>
+  </ng-container>
+</app-base-list>

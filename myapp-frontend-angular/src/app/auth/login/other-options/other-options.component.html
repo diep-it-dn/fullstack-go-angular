@@ -1,0 +1,16 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div class="links">
+    <a mat-button routerLink="../forgot-password">Forgot password?</a>
+    <a mat-button routerLink="../register">Register</a>
+  </div>
+  <div>
+    <mat-divider></mat-divider>
+  </div>
+  <button mat-flat-button color="accent" (click)="loginByGoogle()">
+    <mat-icon svgIcon="google"></mat-icon>Login by Google
+  </button>
+  <!-- <button mat-flat-button color="accent" (click)="authService.facebookAuth()">
+    <mat-icon>facebook</mat-icon>Login by Facebook
+  </button> -->
+
+</div>

@@ -1,0 +1,25 @@
+.base-form {
+  display: flex;
+  justify-content: center;
+
+  mat-card {
+    padding: 40px 70px 50px;
+    align-items: center;
+    mat-card-header {
+      font-size: 20px;
+      justify-content: center;
+    }
+
+    .form-error {
+      padding-bottom: 10px;
+    }
+
+    ::ng-deep mat-form-field {
+      width: 200px !important;
+    }
+
+    .buttons {
+      padding-top: 15px;
+    }
+  }
+}

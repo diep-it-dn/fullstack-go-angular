@@ -1,0 +1,28 @@
+<div class="base-form">
+  <div>
+    <app-progress-bar [loading]="baseForm.loading"></app-progress-bar>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{baseForm.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="form-error">
+          <mat-error *ngIf="baseForm.err">
+            {{ baseForm.err }}
+          </mat-error>
+        </div>
+        <form class="auth-form" [formGroup]="baseForm.form" (submit)="onSubmit()">
+          <ng-content select="[form-fields]" [formGroup]="baseForm.form" fxLayout="column"></ng-content>
+
+          <div fxLayoutAlign="center center" class="buttons">
+            <button type="submit" mat-stroked-button color="accent"
+              [disabled]="!baseForm.form.dirty || baseForm.form.invalid || baseForm.loading">{{!baseForm.loading ?
+              baseForm.submitName : 'Processing...'}}
+            </button>
+          </div>
+        </form>
+        <ng-content select="[bottom]"></ng-content>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

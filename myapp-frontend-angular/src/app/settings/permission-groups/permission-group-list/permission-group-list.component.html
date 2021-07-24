@@ -1,0 +1,44 @@
+<div class="myapp-filter">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Filter by name" #name searchBy="name">
+    <button *ngIf="name" matSuffix mat-icon-button (click)="name.value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<app-base-list [dataSource]="dataSource">
+  <ng-container data>
+    <div class="mat-elevation-z8">
+      <mat-table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Name"> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.name}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="Description"> Description </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.node.description}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <button type="button" mat-icon-button (click)="onEdit(element.node.id)" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button type="button" mat-icon-button (click)="onDelete(element.node.id)" matTooltip="Delete">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onEdit(row.node.id)"
+          style="cursor: pointer;"></mat-row>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="2">No data matching the filter "{{name.value}}"</td>
+        </tr>
+      </mat-table>
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" (page)="getPaginatorData($event)"></mat-paginator>
+  </ng-container>
+</app-base-list>

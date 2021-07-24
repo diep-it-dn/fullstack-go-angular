@@ -1,0 +1,99 @@
+enum PostStatus {
+  DRAFT
+  NEED_REVIEW
+  REVIEWING
+  NEED_UPDATE
+  REJECTED
+  APPROVED
+  HIDDEN
+}
+
+type Post implements Node {
+  id: ID!
+  title: String!
+  shortDescription: String!
+  content: String!
+  status: PostStatus!
+  tags: [Tag!]
+  createdBy: User!
+  updatedBy: User!
+  createTime: Time!
+  updateTime: Time!
+}
+
+input CreatePostIn {
+  title: String!
+  shortDescription: String!
+  content: String!
+  tags: [String!]
+}
+
+input UpdateTagsIn {
+  isUpdate: Boolean!
+  value: [String!]
+}
+
+input UpdatePostIn {
+  titleIn: UpdateRequiredStringIn
+  shortDescriptionIn: UpdateRequiredStringIn
+  contentIn: UpdateRequiredStringIn
+  statusIn: PostStatusIn
+  tagsIn: UpdateTagsIn
+}
+
+input PostStatusIn {
+  isUpdate: Boolean!
+  value: PostStatus!
+}
+
+type PostConnection {
+  totalCount: Int!
+  edges: [PostEdge]
+  pageInfo: PageInfo!
+}
+
+type PostEdge {
+  node: Post
+  cursor: Cursor!
+}
+
+enum PostOrderField {
+  CREATE_TIME
+  UPDATE_TIME
+}
+
+input PostOrder {
+  direction: OrderDirection!
+  field: PostOrderField
+}
+
+input PostsIn {
+  pageIn: PageIn
+  orderBy: PostOrder
+  q: String
+  tag: String
+  statuses: [PostStatus!]
+  createdByID: ID
+  updatedByID: ID
+}
+
+input PublishedPostsIn {
+  pageIn: PageIn
+  orderBy: PostOrder
+  q: String
+  tag: String
+  createdByID: ID
+  updatedByID: ID
+}
+
+extend type Query {
+  postById(id: ID!): Post
+  posts(input: PostsIn): PostConnection @hasAnyPermission(permissions: [POST, POST_R])
+  publishedPosts(input: PublishedPostsIn): PostConnection
+}
+
+extend type Mutation {
+  createPost(input: CreatePostIn!): Post! @hasAnyPermission(permissions: [POST, POST_C])
+  updatePost(id: ID!, input: UpdatePostIn!): Post! @hasAnyPermission(permissions: [POST, POST_U])
+  deletePost(id: ID!): Boolean! @hasAnyPermission(permissions: [POST, POST_D])
+}

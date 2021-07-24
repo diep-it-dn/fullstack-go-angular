@@ -1,0 +1,83 @@
+<mat-sidenav-container id="myapp-main-wrapper">
+  <mat-sidenav #snav fixedInViewport="true" mode="over" [opened]="false">
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list (click)="snav.toggle()">
+      <a mat-list-item routerLink="" routerLinkActive="myapp-active-tab" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon><span>Home</span>
+      </a>
+
+      <a mat-list-item [routerLink]="['settings']" routerLinkActive="myapp-active-tab"
+      *appHasAnyPermissions="['CONTENT_SETTING']">
+        <mat-icon>settings</mat-icon><span>Settings</span>
+      </a>
+      <a mat-list-item [routerLink]="['about']" routerLinkActive="myapp-active-tab">
+        <mat-icon>info</mat-icon><span>About</span>
+      </a>
+      <a mat-list-item [routerLink]="['auth/login']" *appShowAuthed="false"
+        routerLinkActive="myapp-active-tab">
+        <mat-icon>login</mat-icon><span>Login</span>
+      </a>
+      <ng-container *appShowAuthed="true">
+        <a mat-list-item [routerLink]="['auth/profile']"
+          routerLinkActive="myapp-active-tab">
+          <mat-icon>person</mat-icon><span>Personal</span>
+        </a>
+        <a mat-list-item [routerLink]="['auth/logout']"
+          routerLinkActive="myapp-active-tab">
+          <mat-icon>logout</mat-icon><span>Logout</span>
+        </a>
+      </ng-container>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="myapp-toolbar">
+      <button fxHide fxShow.lt-md type="button" aria-label="Toggle sidenav" mat-icon-button (click)="snav.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a mat-button routerLink="" routerLinkActive="myapp-active-tab" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon><span>Home</span>
+      </a>
+
+      <span fxFlex></span>
+      <div class="myapp-nav" fxHide fxShow.gt-sm fxLayout="row">
+        <a mat-button [routerLink]="['settings']" routerLinkActive="myapp-active-tab" matTooltip="Settings"
+        *appHasAnyPermissions="['CONTENT_SETTING', 'PERMISSION_GROUP', 'POST']">
+          <mat-icon>settings</mat-icon><span>Settings</span>
+        </a>
+        <a mat-button [routerLink]="['about']" routerLinkActive="myapp-active-tab" matTooltip="About">
+          <mat-icon>info</mat-icon><span>About</span>
+        </a>
+        <ng-container *appShowAuthed="false">
+          <a mat-button [routerLink]="['auth/login']" matTooltip="Login" routerLinkActive="myapp-active-tab">
+            <mat-icon>login</mat-icon><span>Login</span>
+          </a>
+        </ng-container>
+        <ng-container *appShowAuthed="true">
+          <button mat-button [matMenuTriggerFor]="dropMenu" [ngClass]="{'myapp-active-tab': isPersonalTab}"
+            matTooltip="{{authService.accountInfo}}">
+            <ng-container *ngIf="authService.getCurrentUser()!.avatarURL; else defaultAvatar">
+              <img mat-card-avatar src="{{authService.getCurrentUser()!.avatarURL}}">
+            </ng-container>
+            <ng-template #defaultAvatar>
+              <mat-icon>person</mat-icon><span>Personal</span>
+            </ng-template>
+          </button>
+          <mat-menu #dropMenu="matMenu">
+            <a mat-menu-item [routerLink]="['auth/profile']" *appShowAuthed="true">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </a>
+            <a mat-menu-item [routerLink]="['auth/logout']" *appShowAuthed="true">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </a>
+          </mat-menu>
+        </ng-container>
+      </div>
+    </mat-toolbar>
+    <div class="myapp-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

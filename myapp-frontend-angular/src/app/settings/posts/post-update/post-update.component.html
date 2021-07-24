@@ -1,0 +1,32 @@
+<app-base-form [baseForm]="baseForm" (submited)="onSubmit()">
+  <div form-fields [formGroup]="baseForm.form" fxLayout="column">
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="DRAFT">DRAFT</mat-option>
+        <mat-option value="NEED_REVIEW">NEED_REVIEW</mat-option>
+        <mat-option value="REVIEWING">REVIEWING</mat-option>
+        <mat-option value="NEED_UPDATE">NEED_UPDATE</mat-option>
+        <mat-option value="REJECTED">REJECTED</mat-option>
+        <mat-option value="APPROVED">APPROVED</mat-option>
+        <mat-option value="HIDDEN">HIDDEN</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="myapp-full-width">
+      <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+    <tag-input formControlName="tags" [identifyBy]="'id'" [displayBy]="'name'" class="myapp-full-width">
+      <tag-input-dropdown [autocompleteObservable]="tagService.requestAutocompleteTags" [displayBy]="'name'">
+      </tag-input-dropdown>
+    </tag-input>
+    <br>
+    <div>
+      <quill-editor #contentInput placeholder="Enter short description" formControlName="shortDescription">
+      </quill-editor>
+    </div>
+    <br>
+    <div>
+      <quill-editor #contentInput placeholder="Enter content" formControlName="content"></quill-editor>
+    </div>
+  </div>
+</app-base-form>

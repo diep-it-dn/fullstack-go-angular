@@ -1,0 +1,7 @@
+{  
+  "/query": {
+    "target": "http://myapp-backend-go:9999",
+    "secure": false,
+    "changeOrigin": true
+  }
+}

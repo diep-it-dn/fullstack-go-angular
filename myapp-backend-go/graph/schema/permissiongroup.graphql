@@ -1,0 +1,92 @@
+enum Permission {
+  USER
+  USER_C
+  USER_R
+  USER_U
+  USER_D
+
+  PERMISSION_GROUP
+  PERMISSION_GROUP_C
+  PERMISSION_GROUP_R
+  PERMISSION_GROUP_U
+  PERMISSION_GROUP_D
+
+  CONTENT_SETTING
+  CONTENT_SETTING_R
+  CONTENT_SETTING_S
+  CONTENT_SETTING_D
+
+  POST
+  POST_C
+  POST_R
+  POST_U
+  POST_D
+}
+
+type PermissionGroup implements Node {
+  id: ID!
+  name: String!
+  description: String
+  permissions: [Permission!]!
+  createTime: Time!
+  updateTime: Time!
+}
+
+input CreatePermissionGroupIn {
+  name: String!
+  description: String
+  permissions: [Permission!]
+}
+
+input UpdatePermissionsIn {
+  isUpdate: Boolean!
+  value: [Permission!]
+}
+
+input UpdatePermissionGroupIn {
+  nameIn: UpdateRequiredStringIn
+  descriptionIn: UpdateStringIn
+  permissionsIn: UpdatePermissionsIn
+}
+
+type PermissionGroupConnection {
+  totalCount: Int!
+  edges: [PermissionGroupEdge]
+  pageInfo: PageInfo!
+}
+
+type PermissionGroupEdge {
+  node: PermissionGroup
+  cursor: Cursor!
+}
+
+enum PermissionGroupOrderField {
+  NAME
+  DESCRIPTION
+  CREATE_TIME
+  UPDATE_TIME
+}
+
+input PermissionGroupOrder {
+  direction: OrderDirection!
+  field: PermissionGroupOrderField
+}
+
+input PermissionGroupsIn {
+  pageIn: PageIn
+  orderBy: PermissionGroupOrder
+  name: String
+}
+
+extend type Query {  
+  permissionAll: [Permission!] @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_R])
+  permissionGroup(id: ID!): PermissionGroup! @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_R])
+  permissionGroups(input: PermissionGroupsIn): PermissionGroupConnection @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_R])
+  permissionGroupAll: [PermissionGroup!] @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_R])
+}
+
+extend type Mutation {
+  createPermissionGroup(input: CreatePermissionGroupIn!): PermissionGroup! @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_C])
+  updatePermissionGroup(id: ID!, input: UpdatePermissionGroupIn!): PermissionGroup! @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_U])
+  deletePermissionGroup(id: ID!): Boolean! @hasAnyPermission(permissions: [PERMISSION_GROUP, PERMISSION_GROUP_D])
+}
