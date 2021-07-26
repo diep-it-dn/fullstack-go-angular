@@ -31,5 +31,6 @@ docker compose up
 I'm Diep <diep.it.dn@gmail.com> from Da Nang, Viet Nam.
 
 I've been working for this repo since 2020. Today, 2021-07-24, I would like to start sharing it.
+If you like this repo, please give me a :star:. And I'm very happy if you [can buy me a coffee](https://www.buymeacoffee.com/diep.it.dn) to motivate me take time to contribute more for the software development communitity!
 
-If you like this repo, please give me a star. And I'm very happy if you [can buy me a coffee](https://www.buymeacoffee.com/diep.it.dn) to motivate me take time to contribute more for the software development communitity!
+**:heart: _Please like the facebook page [Full-Stack Dev](https://www.facebook.com/groups/1308256889537119) for more updates :heart:_**
