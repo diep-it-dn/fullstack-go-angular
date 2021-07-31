@@ -178,7 +178,7 @@ export abstract class AbstractBaseListComponent<T> implements OnInit, AfterViewI
   }
 
   onEdit(id: string): void {
-    this.router.navigate([this.router.url, id]);
+    this.router.navigate([this.router.url.split('?')[0], id]);
   }
 
   onDelete(id: string): void {
