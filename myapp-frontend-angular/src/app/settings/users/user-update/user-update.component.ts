@@ -76,6 +76,10 @@ export class UserUpdateComponent extends AbstractBaseFormComponent<UserUpdate, U
         isUpdate: true,
         value: user.permissionGroupIDs,
       },
+      displayedNameIn: {
+        isUpdate: true,
+        value: user.displayedName
+      },
       firstNameIn: {
         isUpdate: true,
         value: user.firstName

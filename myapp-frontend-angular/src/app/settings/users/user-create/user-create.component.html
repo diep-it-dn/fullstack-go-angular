@@ -11,9 +11,6 @@
       </mat-form-field>
       <mat-form-field>
         <input type="text" matInput placeholder="Displayed name" formControlName="displayedName">
-        <mat-error *ngIf="form.controls.displayedName.errors?.required">
-          {{form.controls.displayedName.errors!.required.message}}
-        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="First name" formControlName="firstName">
