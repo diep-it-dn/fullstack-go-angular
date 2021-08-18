@@ -175,14 +175,14 @@ func Update(ctx context.Context, client *ent.Client, id int, input *model.Update
 		}
 	}
 	if input.PhoneNumberIn != nil && input.PhoneNumberIn.IsUpdate {
-		if input.GenderIn.Value == nil {
+		if input.PhoneNumberIn.Value == nil {
 			u.ClearPhoneNumber()
 		} else {
 			u.SetPhoneNumber(*input.PhoneNumberIn.Value)
 		}
 	}
 	if input.AddressIn != nil && input.AddressIn.IsUpdate {
-		if input.GenderIn.Value == nil {
+		if input.AddressIn.Value == nil {
 			u.ClearAddress()
 		} else {
 			u.SetAddress(*input.AddressIn.Value)
@@ -190,7 +190,7 @@ func Update(ctx context.Context, client *ent.Client, id int, input *model.Update
 	}
 	if input.DescriptionIn != nil && input.DescriptionIn.IsUpdate {
 		if input.DescriptionIn.Value == nil {
-			u.ClearAddress()
+			u.ClearDescription()
 		} else {
 			u.SetDescription(*input.DescriptionIn.Value)
 		}
@@ -345,14 +345,14 @@ func UpdateCurrentUser(ctx context.Context, client *ent.Client, id int, input *m
 		}
 	}
 	if input.PhoneNumberIn != nil && input.PhoneNumberIn.IsUpdate {
-		if input.GenderIn.Value == nil {
+		if input.PhoneNumberIn.Value == nil {
 			u.ClearPhoneNumber()
 		} else {
 			u.SetPhoneNumber(*input.PhoneNumberIn.Value)
 		}
 	}
 	if input.AddressIn != nil && input.AddressIn.IsUpdate {
-		if input.GenderIn.Value == nil {
+		if input.AddressIn.Value == nil {
 			u.ClearAddress()
 		} else {
 			u.SetAddress(*input.AddressIn.Value)
@@ -360,7 +360,7 @@ func UpdateCurrentUser(ctx context.Context, client *ent.Client, id int, input *m
 	}
 	if input.DescriptionIn != nil && input.DescriptionIn.IsUpdate {
 		if input.DescriptionIn.Value == nil {
-			u.ClearAddress()
+			u.ClearDescription()
 		} else {
 			u.SetDescription(*input.DescriptionIn.Value)
 		}
