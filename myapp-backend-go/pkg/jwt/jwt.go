@@ -49,7 +49,7 @@ func GenerateTokenPair(email string) (*model.TokenPair, error) {
 	return &model.TokenPair{Token: t, RefreshToken: rt}, nil
 }
 
-//ParseToken parses a jwt token and returns the email it it's claims
+//ParseToken parses a jwt token and returns the email in it's claims
 func ParseToken(tokenStr string) (string, error) {
 	if !strings.HasPrefix(tokenStr, "Bearer ") {
 		return "", errors.New("Invalid token")

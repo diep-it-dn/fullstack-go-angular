@@ -30,7 +30,7 @@ func GenerateToken(email string) (string, error) {
 	return tokenString, nil
 }
 
-// ParseToken parses a jwt token and returns the email it it's claims
+// ParseToken parses a jwt token and returns the email in it's claims
 func ParseToken(tokenStr string) (string, error) {
 	token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.AppConfig.Email.ForgotPassword.Token.SecretKey), nil
