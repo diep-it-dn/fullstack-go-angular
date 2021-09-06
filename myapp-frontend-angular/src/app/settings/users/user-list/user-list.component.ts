@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, SortDirection } from '@angular/material/sort';
@@ -15,7 +15,7 @@ import { UserDataSource } from './user.data-source';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent extends AbstractBaseListComponent<UsersQuery> {
+export class UserListComponent extends AbstractBaseListComponent<UsersQuery> implements AfterViewInit {
   displayedColumns = ['email', 'displayedName', 'firstName', 'lastName', 'birthday', 'gender', 'status', 'actions'];
 
   @Input() dataSource!: UserDataSource;
@@ -33,10 +33,15 @@ export class UserListComponent extends AbstractBaseListComponent<UsersQuery> {
     super(activatedRoute, router, dialog, notificationService);
   }
 
+  ngAfterViewInit(): void {
+    this.input.nativeElement.value = this.dataSource.input.email;
+
+    super.ngAfterViewInit();
+  }
+
   override setParams(p: Params): void {
     super.setParams(p);
     if (p.email) {
-      this.input.nativeElement.value = p.email;
       this.dataSource.input.email = p.email;
     } else {
       this.dataSource.input.email = null;

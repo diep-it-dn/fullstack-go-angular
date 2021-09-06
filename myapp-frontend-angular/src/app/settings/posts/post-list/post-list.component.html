@@ -1,8 +1,8 @@
 <div class="myapp-filter">
   <mat-form-field>
     <mat-label>Search</mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
-    <button *ngIf="input" matSuffix mat-icon-button (click)="input.value=''">
+    <input matInput #q searchBy="q">
+    <button *ngIf="q" matSuffix mat-icon-button (click)="q.value=''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
@@ -30,7 +30,7 @@
             <quill-view-html [content]="post.node.shortDescription" theme="snow"></quill-view-html>
           </a>
           <div class="myapp-tags">
-            <a *ngFor="let tag of post.node.tags" [routerLink]="['']" [queryParams]="{tag: tag.name}">
+            <a *ngFor="let tag of post.node.tags" [routerLink]="[]" [queryParams]="{tag: tag.name}">
               {{tag.name}}
             </a>
           </div>

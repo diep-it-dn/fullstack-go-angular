@@ -123,7 +123,6 @@ export abstract class AbstractBaseListComponent<T> implements OnInit, AfterViewI
               this.router.navigate([], {
                 relativeTo: this.activatedRoute,
                 queryParams: queryParams,
-                queryParamsHandling: 'merge',
               });
             })
           )
