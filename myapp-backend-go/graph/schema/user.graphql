@@ -131,7 +131,7 @@ input RegisterUserIn {
 
 input LoginIn {
   email: String! @isValidEmail(field: "email")
-  password: String!
+  password: String! @isValidPassword(field: "password")
 }
 
 type TokenPair {
